@@ -1,28 +1,49 @@
 let id = '';
-let dealer = 0;
-let user = 0;
+let dealer1 = 0;
+let dealer11 = 0;
+let user1 = 0;
+let user11 = 0;
 
 const dealerContainer = document.querySelector('#dealer-container');
 const userContainer = document.querySelector('#user-container');
 
-
-document.addEventListener('DOMContentLoaded', async () => {
+const newGame = async () => {
     id = await getNewDeck();
-    const cardData = await drawOneCard(id, 2);
+    const cardData1 = await drawOneCard(id, 1);
 
     const dealerImg = document.createElement('img');
-    dealerImg.src = cardData.cards[0].image;
+    dealerImg.src = cardData1.cards[0].image;
     dealerContainer.prepend(dealerImg);
+    dealer = await cardValue(cardData1);
 
-    cardValue(cardData)
+    if (typeof dealer == 'object') {
+        dealer1 += 1;
+        dealer11 += 11;
+    } else {
+        dealer1 += dealer;
+        dealer11 += dealer;
+    }
+
+
+    const cardData2 = await drawOneCard(id, 1);
 
     const userImg = document.createElement('img');
-    userImg.src = cardData.cards[1].image;
+    userImg.src = cardData2.cards[0].image;
     userContainer.prepend(userImg);
+    user = await cardValue(cardData2);
+
+    if (typeof user == 'object') {
+        user1 += 1;
+        user11 += 11;
+    } else {
+        user1 += user;
+        user11 += user;
+    }
 
     addBtns(dealerContainer);
     addBtns(userContainer);
-})
+    console.log(dealer1, dealer11, user1, user11);
+}
 
 const addBtns = (node) => {
     const hitMe = document.createElement('button');
@@ -38,21 +59,22 @@ const addBtns = (node) => {
 }
 
 function cardValue(data) {
+    // console.log(data);
     const dealerValue = data.cards[0].value;
-    console.log(typeof dealerValue)
+    const tenPoints = ['JACK', 'QUEEN', 'KING'];
 
-    if (dealerValue === 'ACE') {
-        dealer += 1;
-    } else if (typeof dealerValue == 'number') {
-        dealer += dealerValue;
+    if (tenPoints.includes(dealerValue)) {
+        return 10;
+    } else if (dealerValue === 'ACE') {
+        return [1, 11];
     } else {
-        dealer += 10;
+        return Number(dealerValue);
     }
 }
 
 function removeHitMe() {
-    console.log(this.parentNode);
-    console.log(this.parentNode.children);
+    // console.log(this.parentNode);
+    // console.log(this.parentNode.children);
     this.parentNode.children[1].onclick = null;
 }
 
@@ -60,9 +82,30 @@ async function addNextCard() {
     const card = await drawOneCard(id);
     const nextCard = document.createElement('img');
     nextCard.src = card.cards[0].image;
-    this.parentNode.appendChild(nextCard) 
-    cardValue(card);
-    console.log(dealer)
+    this.parentNode.appendChild(nextCard);
+
+    const value = cardValue(card);
+    console.log(typeof value)
+    if (typeof value == 'object') {
+        if (this.parentNode.id === 'dealer-container') {
+            dealer1 += value[0];
+            dealer11 += value[1];
+        } else {
+            user1 += value[0];
+            user11 += value[1];
+        }
+    } else {
+        if (this.parentNode.id === 'dealer-container') {
+            dealer1 += cardValue(card);
+            dealer11 += cardValue(card);
+        } else {
+            user1 += cardValue(card);
+            user11 += cardValue(card);
+        }
+    }
+
+    console.log(dealer1, dealer11)
+    console.log(user1, user11)
 }
 // document.querySelector('#drawCard-btn').addEventListener('click', async () => {
 //     await drawOneCard(id);
@@ -89,7 +132,17 @@ const drawOneCard = async (id, count = 1) => {
         .then(res => res.json())
         .then(data => {
             card = data;
-            console.log(card);
+            // console.log(card);
         })
     return card;
 }
+
+const checkWinner = (one, two) => {
+    if (one >= 17|| two >= 17) {
+        checkBust(one, two);
+    } else {
+        
+    }
+}
+
+document.addEventListener('DOMContentLoaded', newGame);
