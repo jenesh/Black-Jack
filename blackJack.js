@@ -43,6 +43,13 @@ const newGame = async () => {
     addBtns(dealerContainer);
     addBtns(userContainer);
     console.log(dealer1, dealer11, user1, user11);
+
+
+    checkWinner(dealer1, dealer11);
+    checkWinner(dealer1, dealer11);
+    checkWinner(dealer1, dealer11);
+    checkWinner(dealer1, dealer11);
+
 }
 
 const addBtns = (node) => {
@@ -141,7 +148,7 @@ const checkWinner = (one, two) => {
     if (one >= 17|| two >= 17) {
         checkBust(one, two);
     } else {
-        
+        document.querySelector('#dealer-container').children[2].click();
     }
 }
 
