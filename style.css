@@ -1,11 +1,29 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
 #root {
     display: grid;
     grid-template-columns: 50% 50%;
     justify-content: center;
+    height: 100vh;
+    margin: 0;
 }
 img {
     width: 150px;
 }
 button {
     outline: none;
+}
+#dealer-container {
+    background: rgb(239, 112, 112);
+}
+
+#user-container {
+    background: rgb(64, 97, 228);
+}
+
+#dealer-container, #user-container {
+    display: flex;
+    justify-content: center;
 }

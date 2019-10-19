@@ -14,7 +14,7 @@ const newGame = async () => {
     const dealerImg = document.createElement('img');
     dealerImg.src = cardData1.cards[0].image;
     dealerContainer.prepend(dealerImg);
-    dealer = await cardValue(cardData1);
+    dealer = cardValue(cardData1);
 
     if (typeof dealer == 'object') {
         dealer1 += 1;
@@ -43,6 +43,13 @@ const newGame = async () => {
     addBtns(dealerContainer);
     addBtns(userContainer);
     console.log(dealer1, dealer11, user1, user11);
+
+
+    checkWinner(dealer1, dealer11);
+    checkWinner(dealer1, dealer11);
+    checkWinner(dealer1, dealer11);
+    checkWinner(dealer1, dealer11);
+
 }
 
 const addBtns = (node) => {
@@ -139,10 +146,15 @@ const drawOneCard = async (id, count = 1) => {
 
 const checkWinner = (one, two) => {
     if (one >= 17|| two >= 17) {
-        checkBust(one, two);
+        // checkBust(one, two);
+        addNextCard()
     } else {
-        
+        document.querySelector('#dealer-container').children[2].click();
     }
+}
+
+function checkBust() {
+
 }
 
 document.addEventListener('DOMContentLoaded', newGame);
