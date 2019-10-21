@@ -21,33 +21,24 @@ class Deck {
     }
 }
 
+// const runTest = async () => {
+//     const Deck1 = new Deck();
+
+//     const newDeckResult = await Deck1.generateNewDeck();
+
+//     const drawCardResult1 = await Deck1.drawACard();
+//     const drawCardResult2 = await Deck1.drawACard();
+//     const drawCardResult3 = await Deck1.drawACard();
+
+//     console.log('New Deck', newDeckResult);
+
+//     console.log('Draw Card', drawCardResult1);
+//     console.log('Draw Card', drawCardResult2);
+//     console.log('Draw Card', drawCardResult3);
+// }
+
+// runTest();
 
 
 
-const runTest = async () => {
-    const Deck1 = new Deck();
-
-    const newDeckResult = await Deck1.generateNewDeck();
-
-    const drawCardResult1 = await Deck1.drawACard();
-    const drawCardResult2 = await Deck1.drawACard();
-    const drawCardResult3 = await Deck1.drawACard();
-
-    console.log('New Deck', newDeckResult);
-
-    console.log('Draw Card', drawCardResult1);
-    console.log('Draw Card', drawCardResult2);
-    console.log('Draw Card', drawCardResult3);
-}
-
-runTest();
-
-
-
-const generateNewDeck = async () => {
-    const data = await axios.get(`https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`);
-    return data.data;
-}
-
-
-// module.exports = Deck;
+module.exports = Deck;
