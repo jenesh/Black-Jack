@@ -1,6 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
+    color: white;
 }
 #root {
     display: grid;
@@ -15,15 +16,75 @@ img {
 button {
     outline: none;
 }
+
+#dealer-container, #user-container {
+    display: flex;
+    align-items: center;
+}
+
 #dealer-container {
-    background: rgb(239, 112, 112);
+    background: rgb(52, 32, 32);
 }
 
 #user-container {
-    background: rgb(64, 97, 228);
+    background: rgb(171, 176, 196);
 }
 
 #dealer-container, #user-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+}
+
+img {
+    height: 200px;
+}
+
+button {
+    font-size: 14px;
+    font-weight: 600;;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+#hit-btn {
+    background: rgb(54, 191, 54);
+    color: white;
+}
+
+#stay-btn {
+    background: rgb(206, 49, 49);
+    color: white;
+}
+
+button:hover {
+    animation: 1s ease all;
+    transform: scale(1.1);
+}
+
+button:active {
+    animation: 1s ease all;
+    transform: scale(.95);
+}
+
+#user-cards, #dealer-users {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#popup-div {
+    width: 200px;
+    height: 100px;
+    color: rgb(244, 74, 74);
+    position: absolute;
+    left: calc(50% - 100px);
+    top: calc(25% - 50px);
+    text-align: center;
+    background: rgb(25, 115, 175);
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid white;
+    padding: 4px;
 }
