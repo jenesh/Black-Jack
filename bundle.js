@@ -1673,7 +1673,7 @@ const checkWinner = () => {
     } else {
         displayWinner('dealer');
     }
-    document.querySelector('#dealer-score').innerText += dealerFinalScore;
+    document.querySelector('#dealer-score').innerText = `Score: ${dealerFinalScore}`;
 }
 
 const displayTotal = () => {
@@ -1696,6 +1696,7 @@ const displayWinner = (winner) => {
         winnerPtag.innerText = `It's a tie!`;
     } else {
         winnerPtag.innerText = `The ${winner} wins!`;
+        document.querySelector(`#${winner}-streak`).innerText++;
     }
 
     newGameBtn.innerText = 'New Game';
@@ -1707,6 +1708,7 @@ const displayWinner = (winner) => {
         gameDeck = new Deck();
         user = new User();
         dealer = new Dealer();
+        document.querySelector('#dealer-score').innerText = '';
         startGame(gameDeck);
     })
 
